@@ -4,6 +4,7 @@ services:
   mariadb_off:
     image: mariadb:latest
     container_name: mariadb_off
+    env_file: .env
     networks:
       - inception
     volumes:
@@ -15,6 +16,7 @@ services:
   nginx_off:
     image: nginx:latest
     container_name: nginx_off
+    env_file: .env
     networks:
       - inception
     ports:
@@ -28,6 +30,7 @@ services:
   wordpress_off:
     image: wordpress:latest
     container_name: mariadb_off
+    env_file: .env
     networks:
       - inception
     volumes:
