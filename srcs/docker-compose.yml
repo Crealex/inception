@@ -1,33 +1,34 @@
-services:
+version: "3"
 
+services:
   mariadb_off:
     image: mariadb:latest
     networks:
-        - inception
-    volumes: 
-     - mariadb:database/
-    expose: 
+      - inception
+    volumes:
+      - db:database/
+    expose:
       - "3306"
     restart: unless-stopped
 
   nginx_off:
     image: nginx:latest
     networks:
-        - inception
+      - inception
     ports:
       - "443:443"
     depends_on:
       - wordpress_off
     volumes:
-      - wordpress:www/
+      - site:www/
     restart: on-failure
 
   wordpress_off:
     image: wordpress:latest
     networks:
-        - inception
+      - inception
     volumes:
-        - wordpress:srcs/
+      - site:srcs/
     depends_on:
       - mariadb_off
     restart: on-failure
@@ -35,6 +36,13 @@ services:
       - "9000"
 
 volumes:
+  site:
+    driver: local
+    device: "/home/atomasi/data/site"
+  db:
+    driver: local
+    device: "/home/atomasi/data/db"
 
-
-
+networks:
+  inception:
+    driver: bridge
