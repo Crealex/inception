@@ -11,7 +11,7 @@ services:
       - db:database/
     expose:
       - "3306"
-    restart: unless-stopped
+    restart: alaways
 
   nginx_off:
     image: nginx:latest
@@ -25,7 +25,7 @@ services:
       - wordpress_off
     volumes:
       - site:www/
-    restart: on-failure
+    restart: alaways
 
   wordpress_off:
     image: wordpress:latest
@@ -37,17 +37,23 @@ services:
       - site:srcs/
     depends_on:
       - mariadb_off
-    restart: on-failure
+    restart: alaways
     expose:
       - "9000"
 
 volumes:
   site:
     driver: local
-    device: "/home/atomasi/data/site"
+    driver_opts:
+      type: 'none'
+      o: 'bind'
+      device: "/home/atomasi/data/site"
   db:
     driver: local
-    device: "/home/atomasi/data/db"
+    driver_opts:
+      type: 'none'
+      o: 'bind'
+      device: "/home/atomasi/data/db"
 
 networks:
   inception:
