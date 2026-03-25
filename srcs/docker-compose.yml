@@ -8,10 +8,10 @@ services:
     networks:
       - inception
     volumes:
-      - db:database/
+      - db:/var/lib/mysql
     expose:
       - "3306"
-    restart: alaways
+    restart: always
 
   nginx_off:
     image: nginx:latest
@@ -24,7 +24,7 @@ services:
     depends_on:
       - wordpress_off
     volumes:
-      - site:www/
+      - site:/var/www/wordpress
     restart: always
 
   wordpress_off:
@@ -34,10 +34,10 @@ services:
     networks:
       - inception
     volumes:
-      - site:srcs/
+      - site:/var/www/wordpress
     depends_on:
       - mariadb_off
-    restart: alaways
+    restart: always
     expose:
       - "9000"
 
@@ -47,13 +47,13 @@ volumes:
     driver_opts:
       type: 'none'
       o: 'bind'
-      device: "/home/atomasi/data/site"
+      device: "/home/atomasi/data/wordpress"
   db:
     driver: local
     driver_opts:
       type: 'none'
       o: 'bind'
-      device: "/home/atomasi/data/db"
+      device: "/home/atomasi/data/mariadb"
 
 networks:
   inception:
