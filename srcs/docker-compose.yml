@@ -25,11 +25,11 @@ services:
       - wordpress_off
     volumes:
       - site:www/
-    restart: alaways
+    restart: always
 
   wordpress_off:
     image: wordpress:latest
-    container_name: mariadb_off
+    container_name: wordpress_off 
     env_file: .env
     networks:
       - inception
