@@ -25,6 +25,8 @@ services:
       - wordpress_off
     volumes:
       - site:/var/www/wordpress
+      - ./requirements/nginx/config/certif:/etc/nginx/ssl
+      - ./requirements/nginx/config/:/etc/nginx/conf.d
     restart: always
 
   wordpress_off:
@@ -34,7 +36,7 @@ services:
     networks:
       - inception
     volumes:
-      - site:/var/www/wordpress
+      - site:/var/www/html
     depends_on:
       - mariadb_off
     restart: always
