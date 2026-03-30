@@ -24,13 +24,13 @@ services:
     depends_on:
       - wordpress_off
     volumes:
-      - site:/var/www/wordpress
+      - site:/var/www/html
       - ./requirements/nginx/config/certif:/etc/nginx/ssl
       - ./requirements/nginx/config/:/etc/nginx/conf.d
     restart: always
 
   wordpress_off:
-    image: wordpress:latest
+    image: wordpress:php8.2-fpm
     container_name: wordpress_off 
     env_file: .env
     networks:
