@@ -5,13 +5,12 @@
 mkdir -p /run/mysqld
 chown mysql:mysql /run/mysqld
 
-
 #start service
-if [ ! -d "/var/lib/msyql/${MARIADB_DATABASE}" ]; then
+if [ ! -d "/var/lib/mysql/${MARIADB_DATABASE}" ]; then
 	service mariadb start
 
 	#waiting mariadb start
-	until mysqladmin ping > /dev/null 2>&1; do
+	until mysqladmin ping >/dev/null 2>&1; do
 		echo "waiting starting mariadb..."
 		sleep 1
 	done

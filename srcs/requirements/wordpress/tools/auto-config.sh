@@ -5,10 +5,19 @@ until mysqladmin ping -h"mariadb" -u"${MARIADB_USER}" -p"${MARIADB_PASSWORD}" --
 	echo "waiting mariadb response..."
 done
 
-if [! -f "/var/www/html/wp-config.php"; then 
+if [ ! -f "/var/www/html/wp-includes/version.php" ]; then
+	wp core download --allow-root --path='/var/www/html'
+	chown -R www-data:www-data /var/www/html
+	chmod -R 755 /var/www/html
+fi
+
+if [ ! -f "/var/www/html/wp-config.php" ]; then 
 	wp config create --allow-root \
-		--dbname=$MARIADB_DATABSE \
+		--dbname=$MARIADB_DATABASE \
 		--dbuser=$MARIADB_USER \
-		--dpass=$MARIADB_PASSWORD \
+		--dbpass=$MARIADB_PASSWORD \
 		--dbhost=mariadb:3306 \
-		--path='/var/www/wordpress'
+		--path='/var/www/html'
+fi
+
+exec php-fpm8.2 -F
