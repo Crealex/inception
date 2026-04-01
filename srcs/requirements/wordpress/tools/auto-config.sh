@@ -12,6 +12,7 @@ if [ ! -f "/var/www/html/wp-includes/version.php" ]; then
 fi
 
 if [ ! -f "/var/www/html/wp-config.php" ]; then 
+	echo "creation of first step config wp cli.."
 	wp config create --allow-root \
 		--dbname=$MARIADB_DATABASE \
 		--dbuser=$MARIADB_USER \
