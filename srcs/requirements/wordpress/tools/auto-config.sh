@@ -19,6 +19,26 @@ if [ ! -f "/var/www/html/wp-config.php" ]; then
 		--dbpass=$MARIADB_PASSWORD \
 		--dbhost=mariadb:3306 \
 		--path='/var/www/html'
+
+	echo "config created!"
+
+	wp core install --allow-root \
+		--url="https://${DOMAIN_NAME}" \
+		--title="42 Inception atomasi" \
+		--admin_user="${WP_ADMIN}" \
+		--admin_password="${WP_PASSWORD_ADMIN}" \
+		--admin_email="${WP_ADMIN_MAIL}" \
+		--path='/var/www/html'
+
+	echo "core installed!"
+
+	wp user create --allow-root \
+		"${WP_USER}" \
+		"${WP_USER_MAIL}" \
+		--user_pass="${WP_USER_PASSWORD}" \
+		--role=author \
+		--path='/var/www/html/'
+	echo "user created!"
 fi
 
 exec php-fpm8.2 -F
