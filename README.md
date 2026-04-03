@@ -1,2 +1,8 @@
+*This project has been created as part of the 42 curriculum by atomasi*
 # inception
-Un projet ou l'on va devoir se servir d'une stack docker homemade pour servir un site web
+
+## Description
+
+## Insctructions
+
+## Resources
