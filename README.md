@@ -28,8 +28,8 @@ To configure the domain name you can modify /etc/hosts and add the following lin
 `127.0.0.1 your-domain-name.com`
 _Note: the 127.0.0.1 address is mandatory_
 
-For more informations go to [USER_DOC.md].
-And if you are a developer you can go check the [DEV_DOC.md] for more information.
+For more informations go to [USER_DOC](/USER_DOC.md).
+And if you are a developer you can go check the [DEV_DOC](DEV_DOC.md) for more information.
 
 ### Dependencies
 
